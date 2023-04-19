@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 
 # ニュートン法の関数
 def f(z):
-    return z**4 - 1
+    return z**3 - 1
 
 # ニュートン法の導関数
 def df(z):
-    return sym.Derivative(z)
+    return 3*z**2
 
 # ニュートンダイアグラムの描画
 x, y = np.meshgrid(np.linspace(-2, 2, 500), np.linspace(-2, 2, 500))
