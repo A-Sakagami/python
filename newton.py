@@ -1,13 +1,14 @@
 import numpy as np
+import sympy as sym
 import matplotlib.pyplot as plt
 
 # ニュートン法の関数
 def f(z):
-    return z**3 - 1
+    return z**4 - 1
 
 # ニュートン法の導関数
 def df(z):
-    return 3*z**2
+    return sym.Derivative(z)
 
 # ニュートンダイアグラムの描画
 x, y = np.meshgrid(np.linspace(-2, 2, 5000), np.linspace(-2, 2, 5000))
