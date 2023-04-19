@@ -11,7 +11,7 @@ def df(z):
     return sym.Derivative(z)
 
 # ニュートンダイアグラムの描画
-x, y = np.meshgrid(np.linspace(-2, 2, 5000), np.linspace(-2, 2, 5000))
+x, y = np.meshgrid(np.linspace(-2, 2, 500), np.linspace(-2, 2, 500))
 z = x + 1j*y
 tol = 1e-6  # 収束条件
 max_iter = 100  # 最大反復回数
