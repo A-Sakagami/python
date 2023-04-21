@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 # 時間の範囲とステップサイズ
 t_start = 0
-t_end = 10
+t_end = 100
 h = 0.01
 
 # 初期値
