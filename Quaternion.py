@@ -1,8 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection, Line3DCollection
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
 # クォータニオンを生成する関数
 def make_quaternion(angle, axis):
