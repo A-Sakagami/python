@@ -47,6 +47,7 @@ faces = [[0, 3, 2, 1], [4, 5, 6, 7], [1, 5, 4, 0], [2, 6, 5, 1], [3, 7, 6, 2], [
 colors = ["r", "b"]
 
 # vertices を回転させる
+# @は行列の乗算を示す。クォータニオン回転行列Rを掛けて、回転後の図形の座標を計算する。
 rotated_vertices = vertices @ R
 
 fig = plt.figure(figsize=(10, 5))
