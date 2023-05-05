@@ -48,7 +48,7 @@ colors = ["r", "b"]
 # @は行列の乗算を示す。クォータニオン回転行列Rを掛けて、回転後の図形の座標を計算する。
 rotated_vertices = vertices @ R
 
-fig = plt.figure(figsize=(10, 5))
+fig = plt.figure(figsize=(10,5))
 
 # 回転前の図形を描画する
 ax = fig.add_subplot(121, projection='3d')

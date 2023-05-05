@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.special import gamma
 
-x = np.linspace(-5, 5, 100)
+x = np.linspace(0, 5, 100)
 y = gamma(x)
 
 plt.plot(x, y)
