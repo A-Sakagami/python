@@ -1,16 +1,25 @@
 #入力フォームライブラリ
+import numpy as np
 import tkinter as tk
 from tkinter import ttk
 from LLGequation import LLGequation
 
 #TKオブジェクトをとりあえず作る
 input_form = tk.Tk()
-#磁気回転比γ
-gyromagnetic_ratio = tk.StringVar()
+
+#磁気回転比γ（実験的に求められた値を配列でまとめておく）
+gyromagnetic_ratio = np.array([
+    ["Fe", 1.76*np.power(10,11)],
+    ["Co", 1.86*np.power(10,11)],
+    ["Ni", 2.21*np.power(10,11)],
+    ["GdFe", 2.11*np.power(10,11)]
+])
 #ギルバート定数α
 GilbertConst = tk.StringVar()
 #飽和磁化Ms
 Ms = tk.StringVar()
+#単位時間t
+t = tk.StringVar()
 
 #フォーム内に数値のみを許すための関数
 def validate_number(input):
@@ -34,14 +43,9 @@ frame.grid()
 
 label1 = ttk.Label(frame, text="磁気回転比", padding=(5,2))
 label1.grid(row=0,column=0)
-label1_num=ttk.Entry(
-    frame,
-    validate="key",
-    validatecommand=(frame.register(validate_number), '%P'),
-    invalidcommand=lambda: (label1_num.config({"background": "pink"}), error_message.set("磁気回転比には数値を入力してください")),
-    textvariable=gyromagnetic_ratio,
-    width=20
-)
+label1_num = ttk.Combobox(frame, values=[vec[0] for vec in gyromagnetic_ratio])
+label1_num.set(gyromagnetic_ratio[0,0])
+label1_num.bind("<<ComboboxSelected>>")
 label1_num.grid(row=0,column=1)
 
 label2 = ttk.Label(frame, text="ギルバート定数α", padding=(5,2))
@@ -70,10 +74,10 @@ label3_num.grid(row=2,column=1)
 
 #計算ボタンを押したときの挙動
 def calculate_button_clicked():
-    gyromagnetic_ratio_value = float(gyromagnetic_ratio.get())
+    gyromagnetic_ratio_value = float(label1_num.get().split(",")[1])
     GilbertConst_value = float(GilbertConst.get())
     Ms_value = float(Ms.get())
-    result = LLGequation(gyromagnetic_ratio_value, GilbertConst_value, Ms_value)
+    result = LLGequation(gyromagnetic_ratio_value, GilbertConst_value, Ms_value, t)
     result_label.configure(text=result)
 
 calculate_button = ttk.Button(frame, text="計算", command=calculate_button_clicked)
