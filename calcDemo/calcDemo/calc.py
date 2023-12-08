@@ -1,14 +1,14 @@
 #計算をする
 def calculate(number1,number2,operand):
-    num
+    num=0
     try:
-        if operand=="足し算":
+        if operand=="+":
             num = str(number1 + number2)
-        elif operand=='引き算' :
+        elif operand=='-' :
             num = str(number1 - number2)
-        elif operand=='かけ算':
+        elif operand=='*':
             num = str(number1 * number2)
-        elif operand=='割り算':
+        elif operand=='/':
             num = str(number1 / number2)
     except ZeroDivisionError as e:
         num = e
