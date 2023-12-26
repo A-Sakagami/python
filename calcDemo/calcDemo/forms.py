@@ -26,7 +26,7 @@ operand = np.array(["+","-","*","/"])
 number2 = tk.StringVar()
 
 forms.title("四則演算デモ")
-forms.geometry("400x300")
+forms.geometry("400x600")
 frame = ttk.Frame(forms, borderwidth=32)
 frame.grid()
 
