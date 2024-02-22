@@ -60,10 +60,10 @@ def set_operand():
     else:
         error_message.set("選択の仕方がが正しくありません") 
        
-area2_button1 = tk.Checkbutton(frame, text="Option 1", variable=selected_option, command=set_operand)
-area2_button2 = tk.Checkbutton(frame, text="Option 2", variable=selected_option, command=set_operand)
-area2_button3 = tk.Checkbutton(frame, text="Option 3", variable=selected_option, command=set_operand)
-area2_button4 = tk.Checkbutton(frame, text="Option 4", variable=selected_option, command=set_operand)
+area2_button1 = tk.Checkbutton(frame, text="足し算", variable=selected_option, command=set_operand)
+area2_button2 = tk.Checkbutton(frame, text="引き算", variable=selected_option, command=set_operand)
+area2_button3 = tk.Checkbutton(frame, text="かけ算", variable=selected_option, command=set_operand)
+area2_button4 = tk.Checkbutton(frame, text="わり算", variable=selected_option, command=set_operand)
 area2_button1.grid(row=1,column=1,sticky=(tk.W,tk.E))
 area2_button2.grid(row=1,column=2,sticky=(tk.W,tk.E))
 area2_button3.grid(row=1,column=3,sticky=(tk.W,tk.E))
