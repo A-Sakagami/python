@@ -5,6 +5,14 @@ import calc
 
 forms = tk.Tk()
 error_message = tk.StringVar()
+#数字１
+number1 = tk.StringVar()
+#四則記号
+operand = ["+","-","*","/"]
+#フォームで選択した記号
+selected_option = tk.StringVar(value=operand[0])
+#数字２
+number2 = tk.StringVar()
 
 #フォーム内に数値のみを許すための関数
 def validate_number(input):
@@ -17,14 +25,6 @@ def validate_number(input):
 #入力フォームにエラーメッセージを表示するための関数
 def clear_error_message():
     error_message.set("")
-    
-
-#数字１
-number1 = tk.StringVar()
-#四則記号
-operand = ["+","-","*","/"]
-#数字２
-number2 = tk.StringVar()
 
 forms.title("四則演算デモ")
 forms.geometry("500x300")
@@ -46,29 +46,15 @@ area1_num1.grid(row=0,column=1,sticky=(tk.W,tk.E))
 area2 = ttk.Label(frame, padding=(5,2),text="計算符号")
 area2.grid(row=1,column=0,sticky=tk.W)
 
-
-selected_option=tk.StringVar()
-def set_operand():
-    if area2_button1:
-        selected_option = operand[0]
-    elif area2_button2:
-        selected_option = operand[1]
-    elif area2_button3:
-        selected_option = operand[2]
-    elif area2_button4:
-        selected_option = operand[3]
-    else:
-        error_message.set("選択の仕方がが正しくありません") 
        
-area2_button1 = tk.Checkbutton(frame, text="足し算", variable=selected_option, command=set_operand)
-area2_button2 = tk.Checkbutton(frame, text="引き算", variable=selected_option, command=set_operand)
-area2_button3 = tk.Checkbutton(frame, text="かけ算", variable=selected_option, command=set_operand)
-area2_button4 = tk.Checkbutton(frame, text="わり算", variable=selected_option, command=set_operand)
+area2_button1 = tk.Radiobutton(frame, text="足し算", variable=selected_option ,value=operand[0])
+area2_button2 = tk.Radiobutton(frame, text="引き算", variable=selected_option, value=operand[1])
+area2_button3 = tk.Radiobutton(frame, text="かけ算", variable=selected_option, value=operand[2])
+area2_button4 = tk.Radiobutton(frame, text="わり算", variable=selected_option, value=operand[3])
 area2_button1.grid(row=1,column=1,sticky=(tk.W,tk.E))
 area2_button2.grid(row=1,column=2,sticky=(tk.W,tk.E))
 area2_button3.grid(row=1,column=3,sticky=(tk.W,tk.E))
 area2_button4.grid(row=1,column=4,sticky=(tk.W,tk.E))
-
 
 area3 = ttk.Label(frame, padding=(5,2),text="数字2")
 area3.grid(row=2,column=0,sticky=tk.W)
