@@ -21,10 +21,6 @@ def validate_number(input):
         return True
     except ValueError:
         return False
-    
-#入力フォームにエラーメッセージを表示するための関数
-def clear_error_message():
-    error_message.set("")
 
 forms.title("四則演算デモ")
 forms.geometry("500x300")
