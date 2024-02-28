@@ -1,5 +1,6 @@
 import numpy as np
 import tkinter as tk
+import tkinter.messagebox as messagebox
 from tkinter import ttk
 import calc
 
@@ -13,13 +14,24 @@ operand = ["+","-","*","/"]
 selected_option = tk.StringVar(value=operand[0])
 #数字２
 number2 = tk.StringVar()
+    
+# 数値が無効な場合の処理
+def handle_invalid_input():
+    area1_num1.config({"background": "pink"})
+        
+# 数値が有効な場合の処理
+def handle_valid_input(value, index, mode):
+    area1_num1.config({"background": "white"})
+    error_message.set("")
 
 #フォーム内に数値のみを許すための関数
-def validate_number(input):
+def validate_number(value,index,mode):
     try:
-        float(input)
+        float(value)
+        error_message.set("")  # エラーメッセージをクリア
         return True
     except ValueError:
+        error_message.set("数値を入力してください")
         return False
 
 forms.title("四則演算デモ")
@@ -32,8 +44,8 @@ area1.grid(row=0,column=0,sticky=tk.W)
 area1_num1 =ttk.Entry(
     frame,
     validate="key",
-    validatecommand=(frame.register(validate_number),'%P'),
-    invalidcommand=lambda:  (area1_num1.config({"background": "pink"}), error_message.set("数値を入力してください")),
+    validatecommand=(frame.register(validate_number),"%P", "%i", "%d"),
+    invalidcommand=handle_invalid_input,
     textvariable=number1,
     width=10
 )
@@ -57,8 +69,8 @@ area3.grid(row=2,column=0,sticky=tk.W)
 area3_num2 =ttk.Entry(
     frame,
     validate="key",
-    validatecommand=(frame.register(validate_number),'%P'),
-    invalidcommand=lambda:  (area3_num2.config({"background": "pink"}), error_message.set("数値を入力してください")),
+    validatecommand=(frame.register(validate_number),"%P", "%i", "%d"),
+    invalidcommand=handle_invalid_input,
     textvariable=number2,
     width=10
 )
@@ -66,13 +78,20 @@ area3_num2.grid(row=2,column=1,sticky=(tk.W,tk.E))
 
 #計算ボタンを押したときの挙動
 def calculate_button_clicked():
-    num1value = float(area1_num1.get())
-    operandvalue = selected_option.get()
-    num2value = float(area3_num2.get())
-    result = calc.calculate(num1value,num2value,operandvalue)
-    result_label.configure(text=result)
+    try:
+        num1value = float(area1_num1.get())
+        operandvalue = selected_option.get()
+        num2value = float(area3_num2.get())
+        result = calc.calculate(num1value,num2value,operandvalue)
+        result_label.configure(text=result)
+    except ValueError as e: 
+        messagebox.showerror("エラー",f"入力エラー: {e}")
 
-calculate_button = ttk.Button(frame, text="計算", command=calculate_button_clicked)
+calculate_button = ttk.Button(
+    frame, text="計算", 
+    command=calculate_button_clicked
+    
+)
 calculate_button.grid(row=3, column=0,sticky=tk.W)
 result_label = ttk.Label(frame, text="", padding=(5,2))
 result_label.grid(row=4, column=0,sticky=tk.W)
